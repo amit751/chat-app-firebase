@@ -1,9 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 import firebase from "firebase";
 import SignUp from "./components/SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SingIn from "./components/SingIn";
+import Profile from "./components/Profile";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBZWJOUebJkP9wUuaaP2172OMfQwo8_GcI",
@@ -15,11 +15,11 @@ const firebaseConfig = {
   measurementId: "G-8329MG3CSB",
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+export const app = firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const auth = firebase.auth();
 
-function App() {
+export function App() {
   const [user] = useAuthState(auth);
   const singOut = () => {
     firebase
@@ -36,10 +36,7 @@ function App() {
   return (
     <div>
       {user ? (
-        <>
-          <p>hi user logged in</p>
-          <button onClick={singOut}>singout</button>
-        </>
+        <Profile user={user} />
       ) : (
         <>
           <SignUp />
@@ -50,4 +47,4 @@ function App() {
   );
 }
 
-export default App;
+// export  App;
