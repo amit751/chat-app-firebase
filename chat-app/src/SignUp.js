@@ -18,16 +18,6 @@ export default function SignUp() {
         // Signed in
         console.log(userCredential.user);
         const user = userCredential.user;
-        // user
-        //   .updateProfile({
-        //     photoURL: "https://example.com/jane-q-user/profile.jpg",
-        //   })
-        //   .then(function () {
-        //     // Update successful.
-        //   })
-        //   .catch(function (error) {
-        //     // An error happened.
-        //   });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -53,3 +43,13 @@ export default function SignUp() {
     </div>
   );
 }
+// user
+//   .updateProfile({
+//     photoURL: "https://example.com/jane-q-user/profile.jpg",
+//   })
+//   .then(function () {
+//     // Update successful.
+//   })
+//   .catch(function (error) {
+//     // An error happened.
+//   });

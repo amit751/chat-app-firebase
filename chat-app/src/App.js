@@ -1,10 +1,9 @@
-import "./App.css";
 import firebase from "firebase";
-import SignUp from "./components/SignUp";
+import "./App.css";
+import SignUp from "./SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
-import SingIn from "./components/SingIn";
-import Profile from "./components/Profile";
-
+import SingIn from "./SingIn";
+import Profile from "./Profile";
 const firebaseConfig = {
   apiKey: "AIzaSyBZWJOUebJkP9wUuaaP2172OMfQwo8_GcI",
   authDomain: "chat-app-899d0.firebaseapp.com",
@@ -16,7 +15,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 export const app = firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+
 const auth = firebase.auth();
 
 export function App() {
