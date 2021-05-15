@@ -1,11 +1,18 @@
 import React, { useRef } from "react";
 import firebase from "firebase";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import Message from "./Message";
+
 export default function ActiveChat({ activeChat, user }) {
   const inputText = useRef();
   const firestore = firebase.firestore();
   const messagesref = firestore.collection("messages");
+
+  const [messages] = useCollectionData(
+    messagesref.orderBy("createdAt").limit(3)
+    //.where("room", "==", activeChat)
+  );
   const sendMessage = () => {
-    console.log(inputText.current.value);
     messagesref
       .add({
         content: inputText.current.value,
@@ -20,11 +27,17 @@ export default function ActiveChat({ activeChat, user }) {
         });
       });
     inputText.current.value = "";
+    console.log(messages);
   };
   return (
     <div>
       <h1>{activeChat}</h1>
-      <div id="messages-box"></div>
+      <div id="messages-box">
+        {messages?.map((message, i) => {
+          console.log(message);
+          return <Message key={i} message={message} />;
+        })}
+      </div>
       <label>
         write your message
         <textarea ref={inputText}></textarea>

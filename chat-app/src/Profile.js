@@ -91,7 +91,6 @@ export default function Profile({ user }) {
               <h3>room{i}</h3>
               <button
                 onClick={() => {
-                  console.log(room.room, "rom.rom", room);
                   openChat(room.room);
                 }}
               >

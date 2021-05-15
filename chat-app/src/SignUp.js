@@ -37,9 +37,7 @@ export default function SignUp() {
         <input ref={userPassword} type="text" required></input>
       </label>
 
-      <button on onClick={submit}>
-        submit
-      </button>
+      <button onClick={submit}>submit</button>
     </div>
   );
 }
