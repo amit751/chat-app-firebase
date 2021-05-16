@@ -22,7 +22,8 @@ export default function ActiveChat({ activeChat, user }) {
         userId: user.uid,
         userName: user.displayName,
         room: activeChat,
-        createdAt: new Date(),
+        createdAt: Date.now(),
+        userImg: user.photoURL,
       })
       .then((result) => {
         result.get().then((test) => {
