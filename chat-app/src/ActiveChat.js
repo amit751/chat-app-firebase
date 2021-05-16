@@ -9,9 +9,12 @@ export default function ActiveChat({ activeChat, user }) {
   const messagesref = firestore.collection("messages");
 
   const [messages] = useCollectionData(
-    messagesref.orderBy("createdAt").limit(3)
-    //.where("room", "==", activeChat)
+    messagesref
+      .where("room", "==", activeChat)
+      .orderBy("createdAt", "asc")
+      .limit(25)
   );
+
   const sendMessage = () => {
     messagesref
       .add({
@@ -46,3 +49,16 @@ export default function ActiveChat({ activeChat, user }) {
     </div>
   );
 }
+// messagesref
+//   .where("room", "==", activeChat)
+//   .orderBy("createdAt", "asc")
+//   .limit(25)
+//   .get()
+//   .then((result) => {
+//     result.forEach((doc) => {
+//       console.log("eee", doc.data());
+//     });
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
