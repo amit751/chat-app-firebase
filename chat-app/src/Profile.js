@@ -4,11 +4,29 @@ import React, { useRef, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ActiveChat from "./ActiveChat.js";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Switch, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 
 export default function Profile({ user }) {
-  let location = useLocation();
-  console.log(location);
+  // let location = useLocation();
+  // let history = useHistory();
+  // console.log(location, "LOC");
+  // useEffect(() => {
+  //   console.log("inside");
+  //   const query = location.search.slice(1, 5);
+  //   if (query === "room") {
+  //     const joinRoom = location.search.slice(6);
+  //     if (joinRoom) {
+  //       history.push("/prejoin");
+  //     }
+
+  //     // roomsref.where("room" , "=" , joinRoom).
+  //   }
+  // }, [location.search]);
   useEffect(() => {
     if (user.displayName && user.photoURL) {
       setProfileDetails(true);
@@ -18,7 +36,6 @@ export default function Profile({ user }) {
       .where("users", "array-contains", user.uid)
       .get()
       .then((querySnapshot) => {
-        console.log("result", querySnapshot);
         const newUserRooms = [];
         querySnapshot.forEach((doc) => {
           const room = doc.data();
@@ -27,9 +44,8 @@ export default function Profile({ user }) {
             link: room.link,
             room: room.room,
           });
-          console.log(room);
         });
-        console.log(newUserRooms);
+
         setUserRooms(newUserRooms);
       });
   }, []);
@@ -48,7 +64,6 @@ export default function Profile({ user }) {
   const nickname = useRef();
 
   const openChat = (room) => {
-    console.log(room);
     setActiveChat(room);
   };
   const singOut = () => {
@@ -74,7 +89,6 @@ export default function Profile({ user }) {
       })
       .then(() => {
         console.log("added");
-        console.log(newRoom.link);
 
         newRoom.get().then((result) => {
           setUserRooms([
@@ -86,8 +100,6 @@ export default function Profile({ user }) {
             },
           ]);
         });
-
-        console.log(userRooms);
       })
       .catch((e) => console.log(e));
   };
@@ -123,7 +135,6 @@ export default function Profile({ user }) {
         });
     });
     setProfileDetails(true);
-    console.log("the user:", user);
   };
 
   return (

@@ -4,6 +4,14 @@ import SignUp from "./SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SingIn from "./SingIn";
 import Profile from "./Profile";
+import ReactDOM from "react-dom";
+import PreJoin from "./PreJoin";
+import {
+  BrowserRouter as Router,
+  Switch,
+  useLocation,
+  Route,
+} from "react-router-dom";
 const firebaseConfig = {
   apiKey: "AIzaSyBZWJOUebJkP9wUuaaP2172OMfQwo8_GcI",
   authDomain: "chat-app-899d0.firebaseapp.com",
@@ -31,18 +39,40 @@ export function App() {
         console.log(error);
       });
   };
-  console.log(user);
+
   return (
-    <div>
-      {user ? (
-        <Profile user={user} />
-      ) : (
-        <>
-          <SignUp />
-          <SingIn />
-        </>
-      )}
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <div>
+            {user ? (
+              <Profile user={user} />
+            ) : (
+              <>
+                <SignUp />
+                <SingIn />
+              </>
+            )}
+          </div>
+        </Route>
+        <Route exact path="/rooms">
+          <div>
+            {user ? (
+              <PreJoin user={user} />
+            ) : (
+              <>
+                <h3>please singin/up first</h3>
+                <SignUp />
+                <SingIn />
+              </>
+            )}
+          </div>
+        </Route>
+        {/* <Route path="/prejoin">
+          <PreJoin />
+        </Route> */}
+      </Switch>
+    </Router>
   );
 }
 
