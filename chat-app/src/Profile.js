@@ -140,7 +140,7 @@ export default function Profile({ user }) {
   return (
     <div>
       <img src={imgUrl} />
-      <p>hi user logged in</p>
+      <p>hi {user.displayName} logged in</p>
       <button onClick={singOut}>singout</button>
       <div className="profile-details">
         <label>

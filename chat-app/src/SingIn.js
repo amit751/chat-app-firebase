@@ -4,6 +4,10 @@ import firebase from "firebase";
 export default function SingIn() {
   const userEmail = useRef();
   const userPassword = useRef();
+  const provider = new firebase.auth.GoogleAuthProvider();
+  const singinGoogle = () => {
+    firebase.auth().signInWithRedirect(provider);
+  };
 
   const submit = () => {
     console.log(userEmail.current.value);
@@ -34,8 +38,9 @@ export default function SingIn() {
         Password
         <input ref={userPassword} type="text" required></input>
       </label>
-
       <button onClick={submit}>submit</button>
+      sign in with google
+      <button onClick={singinGoogle}>google</button>
     </div>
   );
 }
