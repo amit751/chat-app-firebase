@@ -34,5 +34,5 @@ export default function Message({ message }) {
   );
 }
 
-// links + add user to a room
+//desc +sort
 // login with google +facebook

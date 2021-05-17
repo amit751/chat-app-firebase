@@ -11,8 +11,8 @@ export default function ActiveChat({ activeChat, user }) {
   const [messages] = useCollectionData(
     messagesref
       .where("room", "==", activeChat)
-      .orderBy("createdAt", "asc")
-      .limit(25)
+      .orderBy("createdAt", "desc")
+      .limit(6)
   );
 
   const sendMessage = () => {
@@ -27,20 +27,22 @@ export default function ActiveChat({ activeChat, user }) {
       })
       .then((result) => {
         result.get().then((test) => {
-          console.log(test.data(), test.data().createdAt);
+          // console.log(test.data(), test.data().createdAt);
         });
       });
     inputText.current.value = "";
     console.log(messages);
   };
+
   return (
     <div>
       <h1>{activeChat}</h1>
       <div id="messages-box">
-        {messages?.map((message, i) => {
-          console.log(message);
-          return <Message key={i} message={message} />;
-        })}
+        {messages
+          ?.sort((a, b) => a.createdAt - b.createdAt)
+          .map((message, i) => {
+            return <Message key={i} message={message} />;
+          })}
       </div>
       <label>
         write your message
@@ -51,15 +53,15 @@ export default function ActiveChat({ activeChat, user }) {
   );
 }
 // messagesref
-//   .where("room", "==", activeChat)
-//   .orderBy("createdAt", "asc")
-//   .limit(25)
-//   .get()
-//   .then((result) => {
-//     result.forEach((doc) => {
-//       console.log("eee", doc.data());
+//     .where("room", "==", activeChat)
+//     .orderBy("createdAt", "desc")
+//     .limit(25)
+//     .get()
+//     .then((result) => {
+//       result.forEach((doc) => {
+//         console.log("eee", doc.data());
+//       });
+//     })
+//     .catch((e) => {
+//       console.log(e);
 //     });
-//   })
-//   .catch((e) => {
-//     console.log(e);
-//   });

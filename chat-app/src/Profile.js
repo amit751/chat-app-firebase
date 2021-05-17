@@ -85,7 +85,7 @@ export default function Profile({ user }) {
         room: newRoom.id,
         users: [user.uid],
         password: uuidv4(),
-        link: baseUrl + "/" + newRoom.id,
+        link: baseUrl + "/rooms?room=" + newRoom.id,
       })
       .then(() => {
         console.log("added");

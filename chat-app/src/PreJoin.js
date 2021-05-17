@@ -58,11 +58,13 @@ export default function PreJoin() {
       .catch((e) => console.log(e));
     setAuthorized(true);
   };
-
+  const toProfile = () => {
+    history.push("/");
+  };
   return (
     <div>
       <div>
-        <button>back to profile</button>
+        <button onClick={toProfile}>back to profile</button>
       </div>
       {authorized ? (
         <div id="active-chat">
