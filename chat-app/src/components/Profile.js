@@ -1,32 +1,11 @@
 import firebase from "firebase";
-import { app } from "./App.js";
+
 import React, { useRef, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ActiveChat from "./ActiveChat.js";
-import ReactDOM from "react-dom";
-import {
-  BrowserRouter as Router,
-  Switch,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
+import RoomDisplay from "./RoomDisplay.js";
 
 export default function Profile({ user }) {
-  // let location = useLocation();
-  // let history = useHistory();
-  // console.log(location, "LOC");
-  // useEffect(() => {
-  //   console.log("inside");
-  //   const query = location.search.slice(1, 5);
-  //   if (query === "room") {
-  //     const joinRoom = location.search.slice(6);
-  //     if (joinRoom) {
-  //       history.push("/prejoin");
-  //     }
-
-  //     // roomsref.where("room" , "=" , joinRoom).
-  //   }
-  // }, [location.search]);
   useEffect(() => {
     if (user.displayName && user.photoURL) {
       setProfileDetails(true);
@@ -48,7 +27,7 @@ export default function Profile({ user }) {
 
         setUserRooms(newUserRooms);
       });
-  }, []);
+  }, []); ///user
   const baseUrl = "http://localhost:3000";
   const [activeChat, setActiveChat] = useState(null);
   const [userRooms, setUserRooms] = useState([]);
@@ -138,23 +117,29 @@ export default function Profile({ user }) {
   };
 
   return (
-    <div>
-      <img src={imgUrl} />
-      <p>hi {user.displayName} logged in</p>
-      <button onClick={singOut}>singout</button>
-      <div className="profile-details">
-        <label>
-          <h2>set profile</h2>
+    <div className="profile-component">
+      <div className="user-stamp">
+        <img src={imgUrl} className="profile-img" />
+        <p> {user.displayName} </p>
+      </div>
+      <button className="signout" onClick={singOut}>
+        singout
+      </button>
+      <div className="set-profile-details">
+        <h2> profile settings</h2>
+        <div>
           image:
           <input type="file" ref={uploadedFile} required></input>
-          {/* <button onClick={upload}>submit</button> */}
-          choose your nickname
+        </div>
+
+        <div>
+          username:
           <input required ref={nickname}></input>
-          <button type="submit" onClick={setUserDetails}>
-            submit
-          </button>
-        </label>
-        {popMessage}
+        </div>
+        <button type="submit" onClick={setUserDetails}>
+          submit
+        </button>
+        <div> {popMessage}</div>
       </div>
 
       {profileDetails ? (
@@ -163,21 +148,9 @@ export default function Profile({ user }) {
             <button onClick={createRoom}>create chat room</button>
           </div>
           <div id="user-rooms">
-            {userRooms.map((room, i) => {
+            {userRooms?.map((room, i) => {
               return (
-                <div key={i}>
-                  <h3>room{i}</h3>
-                  <button
-                    onClick={() => {
-                      openChat(room.room);
-                    }}
-                  >
-                    open
-                  </button>
-                  <p>
-                    link:{room.link}, passcode:{room.password}
-                  </p>
-                </div>
+                <RoomDisplay room={room} openChat={openChat} i={i} key={i} />
               );
             })}
           </div>
@@ -195,5 +168,16 @@ export default function Profile({ user }) {
     </div>
   );
 }
-// photoURL
-// displayName
+// <div key={i}>
+//   <h3>room{i}</h3>
+//   <button
+//     onClick={() => {
+//       openChat(room.room);
+//     }}
+//   >
+//     open
+//   </button>
+//   <p>
+//     link:{room.link}, passcode:{room.password}
+//   </p>
+// </div>

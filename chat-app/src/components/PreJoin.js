@@ -17,7 +17,6 @@ export default function PreJoin() {
   const roomPassword = useRef();
 
   useEffect(() => {
-    console.log("inside");
     const query = location.search.slice(1, 5);
     const joinRoom = location.search.slice(6);
     if (!(query === "room") || !joinRoom) history.push("/");

@@ -42,7 +42,7 @@ export default function SignUp() {
       .then((userCredential) => {
         // Signed in
         console.log(userCredential.user);
-        const user = userCredential.user;
+        // const user = userCredential.user;
       })
       .catch((error) => {
         const errorCode = error.code;
