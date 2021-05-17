@@ -49,6 +49,13 @@ export default function PreJoin() {
       return setPopMessage("incorect password");
     }
     ///ad user to room.users
+    const wantedRoomRef = roomsref.doc(Room.room);
+    wantedRoomRef
+      .update({ users: firebase.firestore.FieldValue.arrayUnion(user.uid) })
+      .then((result) => {
+        console.log(result, "updated succesfuly");
+      })
+      .catch((e) => console.log(e));
     setAuthorized(true);
   };
 
