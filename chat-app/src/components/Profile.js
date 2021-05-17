@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ActiveChat from "./ActiveChat.js";
 import RoomDisplay from "./RoomDisplay.js";
-
+import "../style/profile.css";
 export default function Profile({ user }) {
   useEffect(() => {
     if (user.displayName && user.photoURL) {
@@ -118,53 +118,60 @@ export default function Profile({ user }) {
 
   return (
     <div className="profile-component">
-      <div className="user-stamp">
-        <img src={imgUrl} className="profile-img" />
-        <p> {user.displayName} </p>
-      </div>
-      <button className="signout" onClick={singOut}>
-        singout
-      </button>
-      <div className="set-profile-details">
-        <h2> profile settings</h2>
-        <div>
-          image:
-          <input type="file" ref={uploadedFile} required></input>
+      <div className="profile-component-warper">
+        <div className="head">
+          <div id="user">
+            <div className="user-stamp">
+              <span id="stamp-box">
+                <img src={imgUrl} className="profile-img" />
+                <p> {user.displayName} </p>
+              </span>
+            </div>
+            <div className="signout">
+              <button onClick={singOut}>singout</button>
+            </div>
+          </div>
+          <div className="set-profile-details">
+            <h2> profile settings</h2>
+            <div>
+              image:
+              <input type="file" ref={uploadedFile} required></input>
+            </div>
+
+            <div>
+              username:
+              <input required ref={nickname}></input>
+            </div>
+            <button type="submit" onClick={setUserDetails}>
+              submit
+            </button>
+            <div> {popMessage}</div>
+          </div>
         </div>
 
-        <div>
-          username:
-          <input required ref={nickname}></input>
-        </div>
-        <button type="submit" onClick={setUserDetails}>
-          submit
-        </button>
-        <div> {popMessage}</div>
-      </div>
-
-      {profileDetails ? (
-        <>
-          <div id="create-room">
+        <div id="create-room">
+          <div>
             <button onClick={createRoom}>create chat room</button>
           </div>
-          <div id="user-rooms">
-            {userRooms?.map((room, i) => {
-              return (
-                <RoomDisplay room={room} openChat={openChat} i={i} key={i} />
-              );
-            })}
-          </div>
-          <div id="active-chat">
-            {activeChat ? (
-              <ActiveChat activeChat={activeChat} user={user} />
-            ) : (
-              <></>
-            )}
-          </div>
-        </>
-      ) : (
-        <></>
-      )}
+        </div>
+
+        <div id="user-rooms">
+          {userRooms?.map((room, i) => (
+            <RoomDisplay room={room} openChat={openChat} i={i} key={i} />
+          ))}
+        </div>
+      </div>
+      <div id="active-chat">
+        {activeChat ? (
+          <ActiveChat
+            activeChat={activeChat}
+            user={user}
+            setActiveChat={setActiveChat}
+          />
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }

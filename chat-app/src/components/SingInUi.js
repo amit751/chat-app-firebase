@@ -1,8 +1,17 @@
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import React from "react";
+import React, { useRef } from "react";
 
 export default function SingInUi() {
+  const ref = useRef();
+  function copy(e) {
+    console.log(ref.current.value);
+    ref.current.select();
+    document.execCommand("copy");
+    // This is just personal preference.
+    // I prefer to not show the the whole text area selected.
+  }
+
   var uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: () => false,

@@ -1,0 +1,67 @@
+.profile-component .profile-img {
+  height: 3rem;
+  width: 3rem;
+}
+/* .profile-component #stamp-box {
+  padding: 0.5rem;
+  left: 3rem;
+  top: 2rem;
+  position: absolute;
+} 
+  
+ .profile-component .signout {
+  right: 5rem;
+  top: 5rem;
+  display: inline;
+  position: absolute;
+  width: 5rem;
+  align-self: center;
+} 
+ .profile-component .set-profile-details {
+} */
+.profile-component #user-rooms {
+  /* width: 100%; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction: row;
+}
+/* .profile-component .roowarper {
+  display: grid;
+  grid-template-columns: 80% 20%;
+} */
+.room-display {
+  color: crimson;
+  text-align: center;
+  width: fit-content;
+}
+.profile-component .profile-component-warper {
+  display: grid;
+  grid-template-rows: 40% 20% 40%;
+}
+.profile-component .head {
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+.profile-component #create-room {
+  text-align: center;
+}
+.profile-component #user {
+  height: fit-content;
+  width: fit-content;
+  align-self: center;
+  margin-left: 25rem;
+}
+.profile-component .set-profile-details {
+  height: fit-content;
+  width: fit-content;
+  margin-left: 45rem;
+  margin-top: 2rem;
+}
+.profile-component #active-chat {
+  position: absolute;
+  top: 10%;
+  right: 40%;
+  z-index: 1;
+  background-color: aqua;
+}

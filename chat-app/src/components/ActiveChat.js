@@ -3,7 +3,7 @@ import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 
-export default function ActiveChat({ activeChat, user }) {
+export default function ActiveChat({ activeChat, user, setActiveChat }) {
   const inputText = useRef();
   const firestore = firebase.firestore();
   const messagesref = firestore.collection("messages");
@@ -36,6 +36,13 @@ export default function ActiveChat({ activeChat, user }) {
 
   return (
     <div>
+      <button
+        onClick={() => {
+          setActiveChat(false);
+        }}
+      >
+        close
+      </button>
       <h1>{activeChat}</h1>
       <div id="messages-box">
         {messages
