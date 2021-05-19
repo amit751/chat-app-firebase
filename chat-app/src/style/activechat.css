@@ -1,0 +1,11 @@
+.active-chat #messages-box {
+  display: grid;
+  grid-template-columns: auto;
+}
+.active-chat .message-container {
+  display: flex;
+}
+.active-chat .current-user-message {
+  background-color: aquamarine;
+  flex-direction: row-reverse;
+}

@@ -61,7 +61,7 @@ export default function PreJoin() {
     history.push("/");
   };
   return (
-    <div>
+    <div className="prejoin-component">
       <div>
         <button onClick={toProfile}>back to profile</button>
       </div>

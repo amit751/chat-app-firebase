@@ -1,6 +1,6 @@
 import React from "react";
-
-export default function Message({ message }) {
+import "../style/message.css";
+export default function Message({ message, user }) {
   console.log(message.createdAt);
   const formatDate = (message) => {
     let result = "";
@@ -19,7 +19,7 @@ export default function Message({ message }) {
     return result;
   };
   return (
-    <div>
+    <div className="message-component">
       <div>
         <span>
           <div>

@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import ActiveChat from "./ActiveChat.js";
 import RoomDisplay from "./RoomDisplay.js";
 import "../style/profile.css";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 export default function Profile({ user }) {
   useEffect(() => {
     if (user.displayName && user.photoURL) {
@@ -41,6 +42,9 @@ export default function Profile({ user }) {
   );
   const [profileDetails, setProfileDetails] = useState(false);
   const nickname = useRef();
+  const [userRooms1] = useCollectionData(
+    roomsref.where("users", "array-contains", user.uid)
+  );
 
   const openChat = (room) => {
     setActiveChat(room);
@@ -156,7 +160,7 @@ export default function Profile({ user }) {
         </div>
 
         <div id="user-rooms">
-          {userRooms?.map((room, i) => (
+          {userRooms1?.map((room, i) => (
             <RoomDisplay room={room} openChat={openChat} i={i} key={i} />
           ))}
         </div>

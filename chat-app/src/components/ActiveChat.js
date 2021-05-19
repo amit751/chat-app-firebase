@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import firebase from "firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Message from "./Message";
-
+import "../style/activechat.css";
 export default function ActiveChat({ activeChat, user, setActiveChat }) {
   const inputText = useRef();
   const firestore = firebase.firestore();
@@ -35,7 +35,7 @@ export default function ActiveChat({ activeChat, user, setActiveChat }) {
   };
 
   return (
-    <div>
+    <div className="active-chat">
       <button
         onClick={() => {
           setActiveChat(false);
@@ -43,19 +43,31 @@ export default function ActiveChat({ activeChat, user, setActiveChat }) {
       >
         close
       </button>
-      <h1>{activeChat}</h1>
+      <h1>room</h1>
       <div id="messages-box">
         {messages
           ?.sort((a, b) => a.createdAt - b.createdAt)
           .map((message, i) => {
-            return <Message key={i} message={message} />;
+            const classname =
+              message.userId === user.uid ? "current-user-message" : "";
+            return (
+              <div className={`message-container ${classname}`}>
+                {" "}
+                <Message
+                  key={i}
+                  message={message}
+                  user={user}
+                  className={classname}
+                />
+              </div>
+            );
           })}
       </div>
-      <label>
-        write your message
+      <div className="massege-input">
+        <p>write your message</p>
         <textarea ref={inputText}></textarea>
         <button onClick={sendMessage}>send</button>
-      </label>
+      </div>
     </div>
   );
 }
