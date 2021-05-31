@@ -15,7 +15,7 @@ export default function PreJoin() {
   const [authorized, setAuthorized] = useState(false);
   const [popMessage, setPopMessage] = useState();
   const roomPassword = useRef();
-
+  console.log(location, "location", "history ", window.location.href);
   useEffect(() => {
     const query = location.search.slice(1, 5);
     const joinRoom = location.search.slice(6);

@@ -29,7 +29,7 @@ export default function Profile({ user }) {
         setUserRooms(newUserRooms);
       });
   }, []); ///user
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://chat-app-899d0.web.app";
   const [activeChat, setActiveChat] = useState(null);
   const [userRooms, setUserRooms] = useState([]);
   const [popMessage, setPopMessage] = useState();
